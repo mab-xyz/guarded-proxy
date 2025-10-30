@@ -222,7 +222,7 @@ interface IGuardedProxy {
      * @param target The contract address to allowlist the function for
      * @param selector The 4-byte function selector to allowlist
      */
-    function addToAllowlist(address target, bytes4 selector) external;
+    function addToAllowlist(address target, bytes4 selector) onlyOwner external;
     
     /**
      * @notice Adds multiple function selectors to the allowlist for a target contract
@@ -233,7 +233,7 @@ interface IGuardedProxy {
      * @param target The contract address to allowlist the functions for
      * @param selectors Array of 4-byte function selectors to allowlist
      */
-    function addBatchToAllowlist(address target, bytes4[] calldata selectors) external;
+    function addBatchToAllowlist(address target, bytes4[] calldata selectors) onlyOwner external;
     
     /**
      * @notice Removes a function selector from the allowlist
@@ -243,17 +243,7 @@ interface IGuardedProxy {
      * @param target The contract address to remove the function from
      * @param selector The 4-byte function selector to remove
      */
-    function removeFromAllowlist(address target, bytes4 selector) external;
-    
-    /**
-     * @notice Transfers ownership of the contract to a new address
-     * @dev MUST be called by the current contract owner
-     * @dev MUST emit OwnershipTransferred event on success
-     * @dev MUST revert with InvalidAddress if newOwner is zero address
-     * @dev MUST revert with Unauthorized if caller is not owner
-     * @param newOwner The address of the new owner
-     */
-    function transferOwnership(address newOwner) external;
+    function removeFromAllowlist(address target, bytes4 selector) onlyOwner external;
     
     // ============ Core Functions ============
     
@@ -279,6 +269,7 @@ interface IGuardedProxy {
      * @return returnData The data returned from the delegatecall
      */
     function executeDelegatecall(address target, bytes calldata data) 
+        onlyOwner
         external 
         payable 
         returns (bool success, bytes memory returnData);
@@ -303,7 +294,7 @@ interface IGuardedProxy {
      * @param to The address to send ETH to
      * @param amount The amount of ETH to withdraw in wei
      */
-    function withdrawEther(address payable to, uint256 amount) external;
+    function withdrawEther(address payable to, uint256 amount) onlyOwner external;
     
     /**
      * @notice Fallback function that intercepts all calls and validates against allowlist
