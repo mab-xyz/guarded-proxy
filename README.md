@@ -52,43 +52,13 @@ Example: Parent gives child a crypto wallet with limited capabilities
 - Cannot: Transfer large amounts, interact with risky DeFi, change ownership
 
 
-### **DAO Treasury with Staged Permissions**
+### **DAO Treasury with Protection**
 
 Scenario: DAO wants to try new strategies and protocols without full risk exposure
 - Treasury wrapper holds DAO funds
 - DAO votes to allowlist specific strategy functions
 - Can enable: stake(), unstake(), claimRewards()
 - Blocked by default: emergencyWithdraw(), migrate()
-
-### **Multi-Signature Wallet with Role-Based Execution**
-
-Scenario: Different signers have different permissions
-- Low-permission signers can only call allowlisted functions
-- High-permission signers can modify allowlist
-- Functions exposed: Daily operations (transfers, approvals)
-- Functions blocked: Admin operations (upgrade, ownership transfer)
-
-Corporate treasury example:
-- CFO: Can approve payments, token transfers
-- CEO: Can modify allowlist, add new integrations
-- Accountant: Can only view balances, generate reports
-
-
-### **Gradual Feature Rollout System**
-
-Scenario: Protocol wants to roll out features incrementally
-- Start with core features allowlisted
-- Monitor usage and security
-- Gradually allowlist more advanced features
-- Can instantly disable problematic features
-
-DeFi protocol example:
-Phase 1: Basic swap() only
-Phase 2: Add addLiquidity(), removeLiquidity()
-Phase 3: Add flashLoan() after security review
-Phase 4: Add governance functions
-- If exploit found in Phase 3, instantly remove from allowlist
-
 
 ### **Institutional Compliance-Restricted DeFi Access**
 
@@ -115,6 +85,20 @@ Use case - Crypto allowance for teenager:
 - Can stake in safe protocols (allowlisted stake functions)
 - Cannot: Access principal, use high-risk DeFi, transfer to unknown addresses
 
+### **Gradual Feature Rollout System**
+
+Scenario: Protocol wants to roll out features incrementally
+- Start with core features allowlisted
+- Monitor usage and security
+- Gradually allowlist more advanced features
+- Can instantly disable problematic features
+
+DeFi protocol example:
+Phase 1: Basic swap() only
+Phase 2: Add addLiquidity(), removeLiquidity()
+Phase 3: Add flashLoan() after security review
+Phase 4: Add governance functions
+- If exploit found in Phase 3, instantly remove from allowlist
 
 ### **Emergency Pause with Selective Recovery**
 
